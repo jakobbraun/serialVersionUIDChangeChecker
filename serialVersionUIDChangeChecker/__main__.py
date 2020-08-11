@@ -1,5 +1,6 @@
 import subprocess
 import mmap
+import os.path
 
 
 def main():
@@ -22,6 +23,9 @@ def check_file(file_name):
     :return: True if check passed
     :rtype bool
     """
+    if not os.path.isfile(file_name):
+        return True  # file was deleted --> no problem
+
     if contains_file_serial_id(file_name) and not was_serial_id_changed(file_name):
         print(file_name)
         return False
